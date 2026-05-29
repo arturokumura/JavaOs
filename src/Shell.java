@@ -20,8 +20,10 @@ public class Shell {
                    helpCommand();
                    break;
                case "mkdir":
-                   mkdirCommand(directories);
+                   mkdirCommand();
                    break;
+               case "ls":
+                   lsCommand();
            }
     }
     }
@@ -37,7 +39,7 @@ public class Shell {
     }
 
 
-    public void mkdirCommand(ArrayList<String> directories) {
+    public void mkdirCommand() {
         boolean achou = false;
         int pos  = 0;
         String directory = sc.next();
@@ -54,6 +56,17 @@ public class Shell {
         else {
             directories.add(directoryName);
             System.out.println("Pasta criada: " + directoryName);
+        }
+    }
+
+    public void lsCommand() {
+        if (directories.isEmpty()) {
+            System.out.println("Diretório vazio!");
+        }
+        else {
+            for (String pasta : directories) {
+                System.out.println(pasta);
+            }
         }
     }
 }
