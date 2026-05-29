@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class Shell {
     Scanner sc = new Scanner(System.in);
-    public String currentDirectory = "root";
+    public String currentDirectory = "root>";
     public String comand;
     public ArrayList<String> directories = new ArrayList<>();
 
@@ -13,7 +13,7 @@ public class Shell {
         System.out.println("JavaOs iniciando...");
         comand = "";
         while (!comand.toLowerCase().equals("exit")) {
-           System.out.print(currentDirectory + ">  ");
+           System.out.print(currentDirectory );
            comand = sc.next();
            switch (comand.toLowerCase()) {
                case "help":
@@ -24,6 +24,10 @@ public class Shell {
                    break;
                case "ls":
                    lsCommand();
+                   break;
+               case "cd":
+                   cdCommand();
+                   break;
            }
     }
     }
@@ -67,6 +71,16 @@ public class Shell {
             for (String pasta : directories) {
                 System.out.println(pasta);
             }
+        }
+    }
+
+    public void cdCommand() {
+        String directoryNameCd = sc.next();
+
+        if (directories.contains(directoryNameCd)) {
+                currentDirectory += directoryNameCd + "/";
+        } else {
+                System.out.println("Diretório não encontrado!");
         }
     }
 }
