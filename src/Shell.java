@@ -28,6 +28,9 @@ public class Shell {
                case "cd":
                    cdCommand();
                    break;
+               case "pwd":
+                   pwdCommand();
+                   break;
            }
     }
     }
@@ -82,6 +85,10 @@ public class Shell {
         } else {
                 System.out.println("Diretório não encontrado!");
         }
+    }
+
+    public void pwdCommand() {
+        System.out.println(currentDirectory);
     }
 }
 
