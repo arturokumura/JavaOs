@@ -19,6 +19,9 @@ public class Shell {
                case "help":
                    helpCommand();
                    break;
+               case "mkdir":
+                   mkdirCommand(directories);
+                   break;
            }
     }
     }
@@ -34,6 +37,25 @@ public class Shell {
     }
 
 
+    public void mkdirCommand(ArrayList<String> directories) {
+        boolean achou = false;
+        int pos  = 0;
+        String directory = sc.next();
+        String directoryName = "";
+        for (int j = 0; j < directory.length(); j++) {
+            if (directory.equals(" ")) {
+                pos = j+1;
+            }
+        }
+        directoryName = directory.substring(pos);
+        if (directories.contains(directoryName)) {
+            System.out.println("Pasta já criada!");
+        }
+        else {
+            directories.add(directoryName);
+            System.out.println("Pasta criada: " + directoryName);
+        }
+    }
 }
 
 
