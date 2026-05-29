@@ -31,6 +31,14 @@ public class Shell {
                case "pwd":
                    pwdCommand();
                    break;
+               case "rmdir":
+                   rmdirCommand();
+                   break;
+               case "exit":
+                   System.out.println("Encerrando JavaOs...");
+                   break;
+               default:
+                   System.out.println("Comando inválido!");
            }
     }
     }
@@ -42,25 +50,18 @@ public class Shell {
         System.out.println("ls");
         System.out.println("cd");
         System.out.println("pwd");
+        System.out.println("rmdir");
         System.out.println("exit");
     }
 
-
     public void mkdirCommand() {
-        boolean achou = false;
-        int pos  = 0;
-        String directory = sc.next();
-        String directoryName = "";
-        for (int j = 0; j < directory.length(); j++) {
-            if (directory.equals(" ")) {
-                pos = j+1;
-            }
-        }
-        directoryName = directory.substring(pos);
+        String directoryName = sc.next();
+
+        System.out.println("DEBUG -> " + directoryName);
+
         if (directories.contains(directoryName)) {
             System.out.println("Pasta já criada!");
-        }
-        else {
+        } else {
             directories.add(directoryName);
             System.out.println("Pasta criada: " + directoryName);
         }
@@ -90,6 +91,21 @@ public class Shell {
     public void pwdCommand() {
         System.out.println(currentDirectory);
     }
+
+    public void rmdirCommand() {
+        String command_rmdir = sc.next();
+        if (directories.isEmpty()) {
+            System.out.println("Diretório vazio!");
+            return;
+        }
+        if (directories.contains(command_rmdir)) {
+            directories.remove(command_rmdir);
+            System.out.println("Pasta removida!");
+        } else {
+            System.out.println("Diretório não encontrado!");
+        }
+    }
 }
+
 
 
