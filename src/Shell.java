@@ -51,14 +51,12 @@ public class Shell {
         System.out.println("cd");
         System.out.println("pwd");
         System.out.println("rmdir");
+        System.out.println("cd ..");
         System.out.println("exit");
     }
 
     public void mkdirCommand() {
         String directoryName = sc.next();
-
-        System.out.println("DEBUG -> " + directoryName);
-
         if (directories.contains(directoryName)) {
             System.out.println("Pasta já criada!");
         } else {
@@ -80,7 +78,18 @@ public class Shell {
 
     public void cdCommand() {
         String directoryNameCd = sc.next();
+        if (directoryNameCd.equals("..")) {
 
+            int ultimaBarra = currentDirectory.lastIndexOf("/", currentDirectory.length() - 2);
+
+            if (ultimaBarra == -1) {
+                currentDirectory = "root>";
+            } else {
+                currentDirectory = currentDirectory.substring(0, ultimaBarra + 1);
+            }
+
+            return;
+        }
         if (directories.contains(directoryNameCd)) {
                 currentDirectory += directoryNameCd + "/";
         } else {
@@ -105,7 +114,9 @@ public class Shell {
             System.out.println("Diretório não encontrado!");
         }
     }
+
 }
+
 
 
 
