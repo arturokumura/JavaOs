@@ -6,6 +6,7 @@ public class Shell {
     public String currentDirectory = "root>";
     public String comand;
     public ArrayList<String> directories = new ArrayList<>();
+    public ArrayList<String> history = new ArrayList<>();
 
 
 
@@ -37,6 +38,9 @@ public class Shell {
                case "exit":
                    System.out.println("Encerrando JavaOs...");
                    break;
+               case "history":
+                   historyCommand();
+                   break;
                default:
                    System.out.println("Comando inválido!");
            }
@@ -45,13 +49,14 @@ public class Shell {
 
     public void helpCommand() {
         System.out.println("Comandos disponíveis:");
-        System.out.println("Help");
-        System.out.println("Mkdir");
+        System.out.println("help");
+        System.out.println("mkdir");
         System.out.println("ls");
         System.out.println("cd");
         System.out.println("pwd");
         System.out.println("rmdir");
         System.out.println("cd ..");
+        System.out.println("history");
         System.out.println("exit");
     }
 
@@ -63,6 +68,7 @@ public class Shell {
             directories.add(directoryName);
             System.out.println("Pasta criada: " + directoryName);
         }
+        history.add("mkdir " + directoryName);
     }
 
     public void lsCommand() {
@@ -74,6 +80,7 @@ public class Shell {
                 System.out.println(pasta);
             }
         }
+        history.add("ls");
     }
 
     public void cdCommand() {
@@ -87,7 +94,6 @@ public class Shell {
             } else {
                 currentDirectory = currentDirectory.substring(0, ultimaBarra + 1);
             }
-
             return;
         }
         if (directories.contains(directoryNameCd)) {
@@ -95,10 +101,12 @@ public class Shell {
         } else {
                 System.out.println("Diretório não encontrado!");
         }
+        history.add("cd " + directoryNameCd);
     }
 
     public void pwdCommand() {
         System.out.println(currentDirectory);
+        history.add("pwd");
     }
 
     public void rmdirCommand() {
@@ -113,8 +121,19 @@ public class Shell {
         } else {
             System.out.println("Diretório não encontrado!");
         }
+        history.add("rmdir " + command_rmdir);
     }
 
+    public void historyCommand() {
+        if (history.isEmpty()) {
+            System.out.println("Não há histórico!");
+        }
+        else {
+            for (String com : history) {
+                System.out.println(com);
+            }
+        }
+    }
 }
 
 
