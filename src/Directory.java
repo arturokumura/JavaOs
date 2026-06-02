@@ -8,7 +8,7 @@ public class Directory {
     public Directory(String nome, Directory parent) {
         this.nome = nome;
         this.parent = parent;
-        this.children = children;
+        this.children = new ArrayList<>();
     }
 
     public String getNome() {

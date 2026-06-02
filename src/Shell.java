@@ -8,7 +8,7 @@ public class Shell {
     private Directory currentDirectory;
     public ArrayList<String> history = new ArrayList<>();
     public Shell() {
-         root = new Directory("root", null);
+         root = new Directory("root> ", null);
          currentDirectory = root;
     }
 
@@ -16,7 +16,7 @@ public class Shell {
         System.out.println("JavaOs iniciando...");
         comand = "";
         while (!comand.toLowerCase().equals("exit")) {
-           System.out.print(currentDirectory );
+           System.out.print(currentDirectory.getNome() );
            comand = sc.next();
            switch (comand.toLowerCase()) {
                case "help":
@@ -28,7 +28,7 @@ public class Shell {
                case "ls":
                    lsCommand();
                    break;
-               case "cd":
+               /*case "cd":
                    cdCommand();
                    break;
                case "pwd":
@@ -42,7 +42,7 @@ public class Shell {
                    break;
                case "history":
                    historyCommand();
-                   break;
+                   break;*/
                default:
                    System.out.println("Comando inválido!");
            }
@@ -70,17 +70,16 @@ public class Shell {
     }
 
     public void lsCommand() {
-        if (directories.isEmpty()) {
-            System.out.println("Diretório vazio!");
+        if (currentDirectory.getChildren().isEmpty()) {
+            System.out.println("Empty directory list");
         }
-        else {
-            for (String pasta : directories) {
-                System.out.println(pasta);
+        else{
+            for (Object directory : currentDirectory.getChildren()) {
+                System.out.println(directory);
             }
         }
-        history.add("ls");
     }
-
+/*
     public void cdCommand() {
         String directoryNameCd = sc.next();
         if (directoryNameCd.equals("..")) {
@@ -131,7 +130,7 @@ public class Shell {
                 System.out.println(com);
             }
         }
-    }
+    }*/
 }
 
 
