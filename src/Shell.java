@@ -3,12 +3,14 @@ import java.util.Scanner;
 
 public class Shell {
     Scanner sc = new Scanner(System.in);
-    public String currentDirectory = "root>";
     public String comand;
-    public ArrayList<String> directories = new ArrayList<>();
+    Directory root = new Directory("root", null);
+    private Directory currentDirectory;
     public ArrayList<String> history = new ArrayList<>();
-
-
+    public Shell() {
+         root = new Directory("root", null);
+         currentDirectory = root;
+    }
 
     public void start() {
         System.out.println("JavaOs iniciando...");
@@ -61,14 +63,10 @@ public class Shell {
     }
 
     public void mkdirCommand() {
-        String directoryName = sc.next();
-        if (directories.contains(directoryName)) {
-            System.out.println("Pasta já criada!");
-        } else {
-            directories.add(directoryName);
-            System.out.println("Pasta criada: " + directoryName);
-        }
-        history.add("mkdir " + directoryName);
+        String dirName = sc.next();
+        Directory dir = new Directory(dirName, currentDirectory);
+        currentDirectory.getChildren().add(dirName);
+
     }
 
     public void lsCommand() {
